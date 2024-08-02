@@ -1,0 +1,51 @@
+import re
+
+
+def get_response(user_input):
+    # Normalize user input
+    user_input = user_input.lower()
+
+    # Define a dictionary of keyword patterns and their responses
+    responses = {
+        r"book(.*)appointment": "You can book an appointment by calling our booking center at (123) 456-7890 or visiting our website.",
+        r"online(.*)appointment": "Yes, you can book an appointment online through our website. Please visit our appointments page.",
+        r"services(.*)hospital": "We offer a variety of services including general medicine, pediatrics, orthopedics, and emergency care.",
+        r"visiting(.*)hours": "Our visiting hours are from 9 AM to 8 PM, Monday through Sunday.",
+        r"insurance": "Yes, we accept most major insurance plans. Please contact our billing department for details.",
+        r"pay(.*)visit": "You can pay for your visit at the billing desk in the hospital or through our online payment portal.",
+        r"emergency": "In case of an emergency, please call 911 or come to our emergency department immediately.",
+        r"doctors(.*)available": "We have a team of experienced doctors in various specialties. You can find more information on our website or call us for details.",
+        r"location(.*)hospital": "Our hospital is located at 123 Main Street, Small Town. You can find directions on our website.",
+        r"contact(.*)information": "You can reach us at (123) 456-7890 or email us at contact@hospital.com.",
+        r"pharmacy(.*)hours": "Our pharmacy is open 24/7 to cater to your needs.",
+        r"covid(.*)protocols": "We are following strict COVID-19 protocols, including mandatory mask-wearing, social distancing, and regular sanitization.",
+        r"ambulance(.*)service": "We provide 24/7 ambulance services. In case of an emergency, please call our ambulance hotline at (123) 456-7899.",
+        r"test(.*)results": "You can check your test results online through our patient portal or contact the lab directly for assistance.",
+        r"how much(.*)services": "The cost of services varies depending on the treatment. Please contact our billing department for detailed pricing information.",
+        r"feedback(.*)complaint": "We value your feedback. Please visit our website's feedback section or contact our support team directly.",
+        r"specialist(.*)consultation": "We have specialists in various fields. Please call our appointment desk to schedule a consultation with a specialist.",
+        r"general(.*)inquiry": "For general inquiries, feel free to contact our reception at (123) 456-7890."
+    }
+
+    # Iterate through the patterns and find a match
+    for pattern, response in responses.items():
+        if re.search(pattern, user_input):
+            return response
+
+    return "I'm sorry, I don't understand that question. Please contact our support for more assistance."
+
+
+def chatbot():
+    print("Hello! How can I assist you today?")
+
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ["quit", "exit", "bye"]:
+            print("Chatbot: Goodbye! Have a great day!")
+            break
+        response = get_response(user_input)
+        print("Chatbot:", response)
+
+
+# Run the chatbot
+chatbot()
